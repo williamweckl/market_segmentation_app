@@ -1,0 +1,29 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development_and_test: &development_and_test
+  <<: *default
+  host: 127.0.0.1
+  port: 5432
+  user: postgres
+  password: postgres
+
+development:
+  <<: *development_and_test
+  database: segmentation_development
+
+test:
+  <<: *development_and_test
+  database: segmentation_test
+
+production:
+  encoding: utf8
+  pool: 15
+#  <<: *default
+#  database: e-sportmasters_production
+#  username: e-sportmasters
+#  password: <%= ENV['E-SPORTMASTERS_DATABASE_PASSWORD'] %>
