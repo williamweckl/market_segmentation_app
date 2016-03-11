@@ -1,0 +1,13 @@
+one:
+  name: $LABEL
+  email: one@one.com
+  age: 30
+  state: <%= State::SC %>
+  position: one
+
+two:
+  name: $LABEL
+  email: two@two.com
+  age: 42
+  state: <%= State::SC %>
+  position: two

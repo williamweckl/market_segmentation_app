@@ -1,0 +1,22 @@
+pt-BR:
+  attributes:
+    name: Nome
+    created_at: Criado em
+    updated_at: Atualizado em
+  activerecord:
+    models:
+      contact:
+        one: &contact Contato
+        other: &contacts Contatos
+      position:
+        one: &position Cargo
+        other: &positions Cargo
+    attributes:
+      contact:
+        email: E-mail
+        age: Idade
+        state: Estado
+        position: *position
+        position_id: *position
+      position:
+        contacts: *contacts

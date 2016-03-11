@@ -55,6 +55,10 @@ GEM
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.1)
     debug_inspector (0.0.2)
+    email_validator (1.6.0)
+      activemodel
+    enumerate_it (1.2.8)
+      activesupport (>= 3.0.0)
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
@@ -172,6 +176,8 @@ DEPENDENCIES
   active_model_serializers (>= 0.10.0.rc4)
   byebug
   coffee-rails (~> 4.1.0)
+  email_validator
+  enumerate_it
   jquery-rails
   listen (~> 3.0.5)
   minitest
