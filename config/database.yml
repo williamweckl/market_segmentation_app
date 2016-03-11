@@ -23,7 +23,3 @@ test:
 production:
   encoding: utf8
   pool: 15
-#  <<: *default
-#  database: e-sportmasters_production
-#  username: e-sportmasters
-#  password: <%= ENV['E-SPORTMASTERS_DATABASE_PASSWORD'] %>
