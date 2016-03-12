@@ -15,3 +15,18 @@
  */
 
 @import "angular-material/angular-material.scss";
+
+.animate {
+  opacity: 1;
+}
+.animate.ng-enter,.animate.ng-leave {
+  -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  opacity: 0;
+}
+.animate.ng-enter-active {
+  opacity: 1;
+}

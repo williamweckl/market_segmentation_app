@@ -22,6 +22,7 @@ var app = angular.module('segmentation', [
     'ngResource',
     'ngMaterial',
     'ngAria',
+    'ngAnimate',
 ]);
 
 this.app.run(['$rootScope', function($rootScope) {

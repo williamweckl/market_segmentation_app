@@ -14,7 +14,7 @@
       </md-toolbar>
 
       <md-list ng-if="!listVars.loading" ng-cloak>
-        <md-list-item class="md-3-line" ng-repeat="contact in contacts track by contact.id">
+        <md-list-item class="md-3-line animate" ng-repeat="contact in contacts track by contact.id">
           <div class="md-list-item-text" layout="column">
             <h3>{{contact.name}}</h3>
             <h4>{{contact.email}}</h4>
