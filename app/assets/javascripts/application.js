@@ -15,11 +15,13 @@
 //= require angular-material
 //= require angular-animate
 //= require angular-aria
+//= require_self
 //= require_tree .
 
 var app = angular.module('segmentation', [
     'ngResource',
     'ngMaterial',
+    'ngAria',
 ]);
 
 this.app.run(['$rootScope', function($rootScope) {
