@@ -1,4 +1,4 @@
-this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', 'Position', 'Index', function ($scope, $rootScope, $q, Position, Index) {
+this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', '$mdDialog', '$mdMedia', 'Position', 'Index', function ($scope, $rootScope, $q, $mdDialog, $mdMedia, Position, Index) {
 
     /* Initialize variables with default values */
     $scope.filterObject = {startAge: 16, endAge: 105};
@@ -8,7 +8,7 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', 'Position', 'I
     /* Don't allow startAge be hight than endAge */
 
     var initializingStartAge = true;
-    $scope.$watch('filterObject.startAge', function(newValue, oldValue) {
+    $scope.$watch('filterObject.startAge', function (newValue, oldValue) {
         if (!initializingStartAge) {
             if (newValue > $scope.filterObject.endAge) {
                 $scope.filterObject.startAge = $scope.filterObject.endAge;
@@ -18,7 +18,7 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', 'Position', 'I
     });
 
     var initializingEndAge = true;
-    $scope.$watch('filterObject.endAge', function(newValue, oldValue) {
+    $scope.$watch('filterObject.endAge', function (newValue, oldValue) {
         if (!initializingEndAge) {
             if (newValue < $scope.filterObject.startAge) {
                 $scope.filterObject.endAge = $scope.filterObject.startAge;
@@ -34,7 +34,7 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', 'Position', 'I
         //Create loading with promise to stop loading when the request is finished
         $scope.positionsLoading = true;
         var loadingPromise = $q.defer();
-        loadingPromise.promise.then(function() {
+        loadingPromise.promise.then(function () {
             $scope.positionsLoading = false;
         });
 
@@ -45,8 +45,8 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', 'Position', 'I
         }
 
         //calling Index service and at the return add objects to list
-        Index.do(IndexConfig).then(function(data) {
-            $scope.positions = $scope.positions.concat(data);
+        Index.do(IndexConfig).then(function (data) {
+            $scope.positions = data;
         });
     };
 
@@ -55,17 +55,17 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', 'Position', 'I
 
     /* Filter */
 
-    $scope.filter = function() {
+    $scope.filter = function () {
         //Create loading with promise to stop loading when the request is finished
         $scope.filterObject.loading = true;
         var loadingPromise = $q.defer();
-        loadingPromise.promise.then(function() {
+        loadingPromise.promise.then(function () {
             $scope.filterObject.loading = false;
         });
 
         //Get selected positions
         $scope.filterObject.positionIds = [];
-        angular.forEach($scope.positions, function(position) {
+        angular.forEach($scope.positions, function (position) {
             if (position.selected)
                 $scope.filterObject.positionIds.push(position.id);
         });
@@ -74,5 +74,40 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', 'Position', 'I
         //Send broadcast to contacts controller
         $rootScope.$broadcast('contacts-filtered', $scope.filterObject, loadingPromise);
     };
+
+    //open dialog to list segments
+    $scope.segmentsDialog = function (event) {
+        var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen
+        $mdDialog.show({
+                controller: 'SegmentsCtrl',
+                templateUrl: 'segments_dialog',
+                //parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose: true,
+                fullscreen: useFullScreen
+            })
+            .then(function (answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
+        $scope.$watch(function () {
+            return $mdMedia('xs') || $mdMedia('sm');
+        }, function (wantsFullScreen) {
+            $scope.customFullscreen = (wantsFullScreen === true);
+        });
+    };
+
+    $scope.$on('segment-selected', function (event, filterObject) {
+        $scope.filterObject = filterObject;
+        angular.forEach($scope.positions, function (position) {
+            if (filterObject.positionIds && filterObject.positionIds.indexOf(position.id.toString()) > -1) {
+                position.selected = true;
+            } else {
+                position.selected = false;
+            }
+        });
+        $scope.filter();
+    });
 
 }]);

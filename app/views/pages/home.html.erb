@@ -84,6 +84,10 @@
         </md-list>
 
         <div layout="row" layout-align="center-center">
+          <md-checkbox class="md-secondary" ng-model="filterObject.save">Salvar segmento</md-checkbox>
+        </div>
+
+        <div layout="row" layout-align="center-center">
           <md-button flex class="md-raised md-primary"
                      aria-label="Segmentar"
                      ng-click="filter(); $event.stopPropagation();"
@@ -93,6 +97,14 @@
           <md-progress-circular md-mode="indeterminate"
                                 md-diameter="20"
                                 ng-if="filterObject.loading" style="margin-top: -5px"></md-progress-circular>
+        </div>
+
+        <div layout="row" layout-align="center-center">
+          <md-button flex class="md-primary"
+                     aria-label="Segmentar"
+                     ng-click="segmentsDialog(); $event.stopPropagation();">
+            Lista de segmentos salvos
+          </md-button>
         </div>
 
       </md-content>

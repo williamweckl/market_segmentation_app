@@ -1,0 +1,36 @@
+<md-dialog aria-label="Segmentos">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Segmentos</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="close()">
+                    <md-icon md-svg-src="close.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="min-width:500px;max-width:800px;max-height:810px; ">
+            <md-list class="fixedRows">
+                <div class="segments-overflow">
+                    <md-list-item class="animate cursor-pointer"
+                                  ng-repeat="segment in segments track by $index"
+                                  ng-if="!segmentsLoading"
+                                  ng-click="filterBySegment(segment)">
+                        <div class="md-list-item-text" layout="column">
+                            <span ng-if="segment.positions">Cargos: {{segment.positions.join(', ')}}</span>
+                            <span ng-if="segment.age">Idade: {{segment.age}} anos</span>
+                            <span ng-if="!segment.age">Idade: de {{segment.start_age || 16}} até {{segment.end_age || 105}} anos</span>
+                        </div>
+                        <md-divider ng-if="!$last"></md-divider>
+                    </md-list-item>
+                    <div layout="row" layout-sm="column" layout-align="space-around" ng-if="segmentsLoading">
+                        <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+                    </div>
+                </div>
+
+                <!--TODO: EMPTY STATE-->
+
+            </md-list>
+        </md-dialog-content>
+    </form>
+</md-dialog>

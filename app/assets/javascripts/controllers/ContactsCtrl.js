@@ -28,13 +28,16 @@ this.app.controller('ContactsCtrl', ['$scope', '$rootScope', '$q', 'Contact', 'I
         if (filterObject) {
             if (filterObject.startAge && filterObject.endAge && filterObject.startAge == filterObject.endAge) {
                 params.age = filterObject.startAge;
+            } else {
+                if (filterObject.startAge)
+                    params.start_age = filterObject.startAge - 1; //subtract 1 to include the age selected
+                if (filterObject.endAge)
+                    params.end_age = filterObject.endAge + 1; //add 1 to include the age selected
             }
-            if (filterObject.startAge)
-                params.start_age = filterObject.startAge - 1; //subtract 1 to include the age selected
-            if (filterObject.endAge)
-                params.end_age = filterObject.endAge + 1; //add 1 to include the age selected
             if (filterObject.positionIds)
                 params.position_ids = filterObject.positionIds;
+            if (filterObject.save)
+                params.save = true;
         }
 
         //configure Index service to get contacts

@@ -36,6 +36,15 @@ md-progress-circular {
 }
 
 .positions-overflow {
-  max-height: 250px;
+  max-height: 200px;
   overflow: auto;
+}
+
+.segments-overflow {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
