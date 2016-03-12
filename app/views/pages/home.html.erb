@@ -40,10 +40,27 @@
         <h1 class="md-toolbar-tools">Filtrar</h1>
       </md-toolbar>
       <md-content layout-padding ng-controller="FiltersCtrl">
-        <p hide-md show-gt-md>
-          This sidenav is locked open on your device. To go back to the default behavior,
-          narrow your display.
-        </p>
+
+        <span>Idade a partir</span>
+        <md-slider ng-model="filterObject.startAge"
+                   aria-label="Idade a partir"
+                   class="md-accent"
+                   md-discrete
+                   flex
+                   min="16"
+                   max="105">
+        </md-slider>
+
+        <span>Idade até</span>
+        <md-slider ng-model="filterObject.endAge"
+                   aria-label="Idade a partir"
+                   class="md-accent"
+                   md-discrete
+                   flex
+                   min="16"
+                   max="105">
+        </md-slider>
+
       </md-content>
     </md-sidenav>
   </section>
