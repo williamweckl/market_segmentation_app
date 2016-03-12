@@ -4,6 +4,8 @@
     "angular": "1.5.0",
     "angular-resource": "1.5.0",
     "angular-material": "1.1.0-rc1",
-    "angular-scroll": "latest"
+    "angular-scroll": "latest",
+    "angular-mocks": "latest",
+    "jasmine-core": "latest"
   }
 }
