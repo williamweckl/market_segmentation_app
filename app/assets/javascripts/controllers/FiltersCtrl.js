@@ -53,4 +53,26 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', 'Position', 'I
     //Get positions
     getPositions();
 
+    /* Filter */
+
+    $scope.filter = function() {
+        //Create loading with promise to stop loading when the request is finished
+        $scope.filterObject.loading = true;
+        var loadingPromise = $q.defer();
+        loadingPromise.promise.then(function() {
+            $scope.filterObject.loading = false;
+        });
+
+        //Get selected positions
+        $scope.filterObject.positionIds = [];
+        angular.forEach($scope.positions, function(position) {
+            if (position.selected)
+                $scope.filterObject.positionIds.push(position.id);
+        });
+        $scope.filterObject.positionIds = $scope.filterObject.positionIds.join();
+
+        //Send broadcast to contacts controller
+        $rootScope.$broadcast('contacts-filtered', $scope.filterObject, loadingPromise);
+    };
+
 }]);

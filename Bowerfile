@@ -2,6 +2,7 @@
 asset 'angular', '1.5.0'
 asset 'angular-resource', '1.5.0'
 asset 'angular-material', '1.1.0-rc1'
+asset 'angular-scroll'
 
 # Adds jasmine-sinon and jasmine-matchers to devDependencies
 #dependency_group :dev_dependencies  do

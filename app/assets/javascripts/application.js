@@ -15,6 +15,7 @@
 //= require angular-material
 //= require angular-animate
 //= require angular-aria
+//= require angular-scroll
 //= require_self
 //= require_tree .
 
@@ -23,6 +24,7 @@ var app = angular.module('segmentation', [
     'ngMaterial',
     'ngAria',
     'ngAnimate',
+    'duScroll',
 ]);
 
 this.app.run(['$rootScope', function($rootScope) {
