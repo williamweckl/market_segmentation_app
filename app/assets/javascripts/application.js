@@ -9,8 +9,19 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
+
+//= require angular
+//= require angular-resource
+//= require angular-material
+//= require angular-animate
+//= require angular-aria
 //= require_tree .
+
+var app = angular.module('segmentation', [
+    'ngResource',
+    'ngMaterial',
+]);
+
+this.app.run(['$rootScope', function($rootScope) {
+
+}]);
