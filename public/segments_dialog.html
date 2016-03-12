@@ -26,10 +26,13 @@
                     <div layout="row" layout-sm="column" layout-align="space-around" ng-if="segmentsLoading">
                         <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
                     </div>
+                    <p ng-if="!segments.length && !segmentsLoading"
+                       layout="row"
+                       layout-align="center-center"
+                       class="empty-state">
+                        Nenhum segmento salvo.
+                    </p>
                 </div>
-
-                <!--TODO: EMPTY STATE-->
-
             </md-list>
         </md-dialog-content>
     </form>

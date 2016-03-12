@@ -76,13 +76,12 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', '$mdDialog', '
     };
 
     //open dialog to list segments
-    $scope.segmentsDialog = function (event) {
+    $scope.segmentsDialog = function () {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen
         $mdDialog.show({
                 controller: 'SegmentsCtrl',
                 templateUrl: 'segments_dialog',
                 //parent: angular.element(document.body),
-                targetEvent: event,
                 clickOutsideToClose: true,
                 fullscreen: useFullScreen
             })
