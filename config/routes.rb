@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   # mount ActionCable.server => '/cable'
 
   resources :contacts, only: :index, defaults: {format: :json}
+  resources :positions, only: :index, defaults: {format: :json}
 end
