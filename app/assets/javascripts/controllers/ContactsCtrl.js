@@ -82,6 +82,7 @@ this.app.controller('ContactsCtrl', ['$scope', '$rootScope', '$q', 'Contact', 'I
         element.scrollTop(0, 1000);
         //reset page
         $scope.page = 1;
+        $scope.listVars.end = false;
         $scope.filterObject = filterObject;
         getContacts(loadingPromise, filterObject);
     });
