@@ -19,3 +19,7 @@ class ActiveSupport::TestCase
 
   ActiveJob::Base.queue_adapter = :test
 end
+
+ActionController::TestCase.class_eval do
+  include RequestTestHelpers
+end

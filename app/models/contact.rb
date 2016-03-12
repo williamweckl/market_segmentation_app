@@ -15,4 +15,17 @@ class Contact < ApplicationRecord
 
   #Callbacks
   before_validation {self.email.downcase! if email.present?}
+
+  #Scopes
+  scope :by_position_ids, -> (position_ids) { where(position_id: position_ids) }
+  scope :by_age, -> (age) { where(age: age) }
+  scope :by_age_range, -> (start_age, end_age) do
+    if start_age and end_age
+      where('age > ? and age < ?', start_age, end_age)
+    elsif start_age
+      where('age > ?', start_age)
+    elsif end_age
+      where('age < ?', end_age)
+    end
+  end
 end

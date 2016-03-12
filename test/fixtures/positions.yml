@@ -3,3 +3,6 @@ one:
 
 two:
   name: $LABEL
+
+three:
+  name: $LABEL

@@ -9,5 +9,33 @@ two:
   name: $LABEL
   email: two@two.com
   age: 42
-  state: <%= State::SC %>
+  state: <%= State::PR %>
   position: two
+
+three:
+  name: $LABEL
+  email: three@three.com
+  age: 22
+  state: <%= State::AM %>
+  position: two
+
+four:
+  name: $LABEL
+  email: four@four.com
+  age: 50
+  state: <%= State::RR %>
+  position: two
+
+five:
+  name: $LABEL
+  email: five@five.com
+  age: 33
+  state: <%= State::RS %>
+  position: three
+
+six:
+  name: $LABEL
+  email: six@six.com
+  age: 31
+  state: <%= State::MT %>
+  position: three

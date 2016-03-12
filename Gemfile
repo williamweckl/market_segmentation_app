@@ -32,7 +32,9 @@ gem 'active_model_serializers', '>= 0.10.0.rc4'
 # Enumerate
 gem 'enumerate_it'
 # Validations
-gem 'email_validator', :require => 'email_validator/strict'
+gem 'email_validator'
+# Pagination
+gem 'will_paginate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
