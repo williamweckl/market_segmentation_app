@@ -41,25 +41,35 @@
       </md-toolbar>
       <md-content layout-padding ng-controller="FiltersCtrl">
 
-        <span>Idade a partir</span>
-        <md-slider ng-model="filterObject.startAge"
-                   aria-label="Idade a partir"
-                   class="md-accent"
-                   md-discrete
-                   flex
-                   min="16"
-                   max="105">
-        </md-slider>
+        <md-slider-container>
+          <span>Idade de</span>
+          <md-slider ng-model="filterObject.startAge"
+                     aria-label="Idade de"
+                     class="md-accent"
+                     md-discrete
+                     flex
+                     min="16"
+                     max="105">
+          </md-slider>
+          <md-input-container>
+            <input flex type="number" ng-model="filterObject.startAge" aria-label="Idade de">
+          </md-input-container>
+        </md-slider-container>
 
-        <span>Idade até</span>
-        <md-slider ng-model="filterObject.endAge"
-                   aria-label="Idade a partir"
-                   class="md-accent"
-                   md-discrete
-                   flex
-                   min="16"
-                   max="105">
-        </md-slider>
+        <md-slider-container>
+          <span>Idade até</span>
+          <md-slider ng-model="filterObject.endAge"
+                     aria-label="Idade até"
+                     class="md-accent"
+                     md-discrete
+                     flex
+                     min="16"
+                     max="105">
+          </md-slider>
+          <md-input-container>
+            <input flex type="number" ng-model="filterObject.endAge" aria-label="Idade até">
+          </md-input-container>
+        </md-slider-container>
 
         <md-list class="fixedRows">
           <md-subheader class="md-no-sticky">Cargos</md-subheader>
