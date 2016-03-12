@@ -37,7 +37,7 @@
                 md-disable-backdrop
                 md-whiteframe="4">
       <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Filtrar</h1>
+        <h1 class="md-toolbar-tools">Segmentar</h1>
       </md-toolbar>
       <md-content layout-padding ng-controller="FiltersCtrl">
 
@@ -60,6 +60,28 @@
                    min="16"
                    max="105">
         </md-slider>
+
+        <md-list class="fixedRows">
+          <md-subheader class="md-no-sticky">Cargos</md-subheader>
+
+            <div layout="row" layout-align="center-center" ng-if="!positionsLoading">
+              <md-input-container>
+                <label>Nome do cargo</label>
+                <input ng-model="positionSearch.name">
+              </md-input-container>
+            </div>
+          <div class="positions-overflow">
+            <md-list-item ng-repeat="position in positions | filter:positionSearch track by position.id"
+                          ng-if="!positionsLoading">
+              <p> {{ position.name }} </p>
+              <md-checkbox class="md-secondary" ng-model="position.selected"></md-checkbox>
+            </md-list-item>
+            <div layout="row" layout-sm="column" layout-align="space-around" ng-if="positionsLoading">
+              <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+            </div>
+          </div>
+
+        </md-list>
 
       </md-content>
     </md-sidenav>

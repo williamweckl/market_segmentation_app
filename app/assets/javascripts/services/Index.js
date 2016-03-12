@@ -11,7 +11,8 @@ this.app.service("Index", ['$q', function ($q) {
                 /* Success */
 
                 //Verify if is the end of the list and set flag
-                if (data.length < params.params.per_page) params.listVars.end = true;
+                if (params.params && params.params.per_page && data.length < params.params.per_page)
+                    params.listVars.end = true;
 
                 //Resolve the promise to end loadings
                 params.loadingPromise.resolve();

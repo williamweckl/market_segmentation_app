@@ -30,3 +30,12 @@
 .animate.ng-enter-active {
   opacity: 1;
 }
+
+md-progress-circular {
+  margin-top: 10px;
+}
+
+.positions-overflow {
+  max-height: 300px;
+  overflow: auto;
+}
