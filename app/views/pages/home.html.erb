@@ -74,7 +74,7 @@
         <md-list class="fixedRows">
           <md-subheader class="md-no-sticky">Cargos</md-subheader>
 
-            <div layout="row" layout-align="center-center" ng-if="!positionsLoading">
+            <div layout="row" layout-align="center-center" ng-if="!positionsLoading && positions.length">
               <md-input-container>
                 <label>Nome do cargo</label>
                 <input ng-model="positionSearch.name">
@@ -89,8 +89,10 @@
             <div layout="row" layout-sm="column" layout-align="space-around" ng-if="positionsLoading">
               <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
             </div>
+            <p ng-if="!positions.length && !positions.loading" layout="row" layout-align="center-center" class="empty-state">
+              Nenhum cargo cadastrado.
+            </p>
           </div>
-
         </md-list>
 
         <div layout="row" layout-align="center-center">

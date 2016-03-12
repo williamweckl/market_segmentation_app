@@ -35,8 +35,22 @@ md-progress-circular {
   margin-top: 10px;
 }
 
+md-input-container {
+  margin-top: 18px;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+md-list-item {
+  min-height: 30px!important;
+}
+
+md-list-item ._md-list-item-inner {
+  min-height: 30px!important;
+}
+
 .positions-overflow {
-  max-height: 200px;
+  max-height: 150px;
   overflow: auto;
 }
 
@@ -47,4 +61,8 @@ md-progress-circular {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.empty-state {
+  color: #9E9E9E;
 }
