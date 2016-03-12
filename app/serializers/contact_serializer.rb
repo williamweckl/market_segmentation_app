@@ -1,6 +1,6 @@
 #encoding: UTF-8
 class ContactSerializer < ActiveModel::Serializer
-  attributes :id, :name, :age, :state, :position
+  attributes :id, :name, :email, :age, :state, :position
 
   def state
     {
