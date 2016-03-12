@@ -58,7 +58,7 @@ class ContactTest < ActiveSupport::TestCase
   should validate_presence_of(:email)
   should validate_presence_of(:age)
   should validate_presence_of(:state)
-  should validate_numericality_of(:age).only_integer.is_less_than_or_equal_to(16).is_greater_than_or_equal_to(105)
+  should validate_numericality_of(:age).only_integer.is_greater_than_or_equal_to(16).is_less_than_or_equal_to(105)
 
   test 'position should be required' do
     should_require(:position)

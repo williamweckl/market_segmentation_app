@@ -11,7 +11,7 @@ class Contact < ApplicationRecord
   #Validations
   validates_presence_of :name, :email, :age, :state
   validates :email, email: true
-  validates_numericality_of :age, only_integer: true, less_than_or_equal_to: 16, greater_than_or_equal_to: 105
+  validates :age, numericality: {only_integer: true, greater_than_or_equal_to: 16, less_than_or_equal_to: 105}
 
   #Callbacks
   before_validation {self.email.downcase! if email.present?}
