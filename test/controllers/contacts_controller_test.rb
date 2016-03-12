@@ -74,4 +74,37 @@ class ContactsControllerTest < ActionController::TestCase
     assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:three).name }.with_indifferent_access
     assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:four).name }.with_indifferent_access
   end
+
+  test 'saving filters' do
+    $redis.flushall #reset redis database
+    filters = {position_ids: [positions(:one).id, positions(:three).id].join(',')}
+
+    get :index, params: filters
+    assert_equal $redis.smembers('segments').size, 0
+    get :index, params: {save: ''}.merge(filters)
+    assert_equal $redis.smembers('segments').size, 0
+    get :index, params: {save: 'false'}.merge(filters)
+    assert_equal $redis.smembers('segments').size, 0
+    get :index, params: {save: '0'}.merge(filters)
+    assert_equal $redis.smembers('segments').size, 0
+    get :index, params: {save: 0}.merge(filters)
+    assert_equal $redis.smembers('segments').size, 0
+    get :index, params: {save: false}.merge(filters)
+    assert_equal $redis.smembers('segments').size, 0
+
+    get :index, params: {save: 'true'}.merge(filters)
+    assert_equal $redis.smembers('segments').size, 1
+    get :index, params: {save: '1'}.merge(start_age: '30', end_age: '50')
+    assert_equal $redis.smembers('segments').size, 2
+    get :index, params: {save: 1}.merge(start_age: '31', end_age: '50')
+    assert_equal $redis.smembers('segments').size, 3
+    get :index, params: {save: true}.merge(start_age: '33', end_age: '50')
+    assert_equal $redis.smembers('segments').size, 4
+
+    # Should not save duplicates
+    get :index, params: {save: 'true'}.merge(filters)
+    assert_equal $redis.smembers('segments').size, 4
+  end
+
+
 end

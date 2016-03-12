@@ -5,6 +5,7 @@ class ContactsController < ApplicationController
     @contacts = Contact.all
     apply_filters
     paginable
+    saveable
     return render json: @contacts
   end
 
@@ -21,6 +22,17 @@ class ContactsController < ApplicationController
 
   def paginable
     @contacts = @contacts.paginate(:page => params[:page], :per_page => params[:per_page] || 30) if params[:page]
+  end
+
+  def saveable
+    if !params[:save].blank? and (params[:save] == true || params[:save].to_s == 'true' || params[:save].try(:to_i) == 1)
+      $redis.sadd('segments', {
+          age: params[:age],
+          start_age: params[:start_age],
+          end_age: params[:end_age],
+          position_ids: params[:position_ids],
+      }.to_json)
+    end
   end
 
 end

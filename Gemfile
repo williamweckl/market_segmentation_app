@@ -31,6 +31,8 @@ gem 'enumerate_it'
 gem 'email_validator'
 # Pagination
 gem 'will_paginate'
+#No relational database
+gem 'redis'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -55,6 +57,7 @@ group :test do
   gem 'minitest'
   gem 'minitest-reporters'
   gem 'shoulda', '>= 3.5.0'
+  gem 'fakeredis'
 end
 
 gem "bower-rails"
