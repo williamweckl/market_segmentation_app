@@ -1,5 +1,5 @@
 //Index service to handle API calls, results and errors
-this.app.service("Index", ['$q', function ($q) {
+this.app.service("Index", ['$q', '$mdToast', function ($q, $mdToast) {
 
     return {
         //Call the api and handle the response
@@ -22,7 +22,11 @@ this.app.service("Index", ['$q', function ($q) {
             }, function(data) {
                 /* Error */
 
-            //    TODO: ERROR handle
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Ocorreu um erro ao buscar dados da API.')
+                        .hideDelay(3000)
+                );
 
                 //Resolve the promise to end loadings
                 params.loadingPromise.resolve();

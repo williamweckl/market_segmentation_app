@@ -33,7 +33,7 @@
          class="empty-state">
         Nenhum contato cadastrado.
       </p>
-      <div layout="row" layout-sm="column" layout-align="center center" ng-if="!listVars.end && !(listVars.loading || listVars.moreContactsloading)">
+      <div layout="row" layout-sm="column" layout-align="center center" ng-if="contacts.length && !listVars.end && !(listVars.loading || listVars.moreContactsloading)">
         <md-button ng-click="getMoreContacts(); $event.stopPropagation();" class="md-primary">Mais contatos</md-button>
       </div>
     </md-content>
