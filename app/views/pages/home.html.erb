@@ -1,8 +1,19 @@
 <div ng-controller="AppCtrl" layout="column" style="height:100%;" ng-cloak>
   <section layout="row" flex>
-    <md-content flex layout-padding>
+    <md-content flex ng-controller="ContactsCtrl">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Contatos</span>
+          </h2>
+          <span flex></span>
+          <md-button class="md-icon-button" hide-gt-md aria-label="Filtros" ng-click="toggleFilters()">
+            <md-icon md-svg-icon="filter.svg"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
       <md-list ng-if="!listVars.loading" ng-cloak>
-        <md-subheader class="md-no-sticky">Contatos</md-subheader>
         <md-list-item class="md-3-line" ng-repeat="contact in contacts track by contact.id">
           <div class="md-list-item-text" layout="column">
             <h3>{{contact.name}}</h3>
@@ -20,19 +31,15 @@
         <md-button ng-click="getMoreContacts()" class="md-primary">Mais contatos</md-button>
       </div>
     </md-content>
-    <md-sidenav
-    class="md-sidenav-right"
-    md-component-id="right"
-    md-is-locked-open="$mdMedia('gt-md')"
-    md-disable-backdrop
-    md-whiteframe="4">
+    <md-sidenav class="md-sidenav-right"
+                md-component-id="filters"
+                md-is-locked-open="$mdMedia('gt-md')"
+                md-disable-backdrop
+                md-whiteframe="4">
       <md-toolbar class="md-theme-indigo">
         <h1 class="md-toolbar-tools">Filtrar</h1>
       </md-toolbar>
       <md-content layout-padding ng-controller="FiltersCtrl">
-        <md-button ng-click="close()" class="md-primary" hide-gt-md>
-          Close Sidenav Left
-        </md-button>
         <p hide-md show-gt-md>
           This sidenav is locked open on your device. To go back to the default behavior,
           narrow your display.
