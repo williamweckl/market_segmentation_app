@@ -1,13 +1,13 @@
 <div ng-controller="AppCtrl" layout="column" style="height:100%;" ng-cloak>
   <section layout="row" flex>
-    <md-content flex ng-controller="ContactsCtrl">
+    <md-content flex ng-controller="ContactsCtrl" ng-click="closeFilters()">
       <md-toolbar>
         <div class="md-toolbar-tools">
           <h2>
             <span>Contatos</span>
           </h2>
           <span flex></span>
-          <md-button class="md-icon-button" hide-gt-md aria-label="Filtros" ng-click="toggleFilters()">
+          <md-button class="md-icon-button" hide-gt-md aria-label="Filtros" ng-click="toggleFilters(); $event.stopPropagation();">
             <md-icon md-svg-icon="filter.svg"></md-icon>
           </md-button>
         </div>
@@ -28,7 +28,7 @@
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
       </div>
       <div layout="row" layout-sm="column" layout-align="center center" ng-if="!listVars.end && !(listVars.loading || listVars.moreContactsloading)">
-        <md-button ng-click="getMoreContacts()" class="md-primary">Mais contatos</md-button>
+        <md-button ng-click="getMoreContacts(); $event.stopPropagation();" class="md-primary">Mais contatos</md-button>
       </div>
     </md-content>
     <md-sidenav class="md-sidenav-right"

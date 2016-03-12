@@ -4,4 +4,9 @@ this.app.controller('AppCtrl', ['$scope', '$mdSidenav', function ($scope, $mdSid
         $mdSidenav('filters')
             .toggle();
     };
+    //Close filters sidenav
+    $scope.closeFilters = function() {
+        $mdSidenav('filters')
+            .close();
+    };
 }]);
