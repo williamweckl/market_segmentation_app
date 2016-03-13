@@ -58,6 +58,10 @@ group :test do
   gem 'minitest-reporters'
   gem 'shoulda', '>= 3.5.0'
   gem 'fakeredis'
+
+  gem 'capybara'
+  gem 'capybara_minitest_spec'
+  gem 'selenium-webdriver'
 end
 
 gem "bower-rails"

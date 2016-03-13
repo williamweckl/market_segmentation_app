@@ -7,7 +7,7 @@
             <span>Contatos</span>
           </h2>
           <span flex></span>
-          <md-button class="md-icon-button" hide-gt-md aria-label="Filtros" ng-click="toggleFilters(); $event.stopPropagation();">
+          <md-button id="filters-btn" class="md-icon-button" hide-gt-md aria-label="Filtros" ng-click="toggleFilters(); $event.stopPropagation();">
             <md-icon md-svg-icon="filter.svg"></md-icon>
           </md-button>
         </div>
@@ -15,7 +15,7 @@
 
       <md-list ng-if="!listVars.loading" ng-cloak>
         <md-list-item class="md-3-line animate" ng-repeat="contact in contacts track by contact.id">
-          <div class="md-list-item-text" layout="column">
+          <div class="md-list-item-text contact-item" layout="column">
             <h3>{{contact.name}}</h3>
             <h4>{{contact.email}}</h4>
             <p>{{contact.position.name}}</p>
@@ -118,7 +118,8 @@
         </div>
 
         <div layout="row" layout-align="center-center">
-          <md-button flex class="md-primary"
+          <md-button id="segments-list-button"
+                     flex class="md-primary"
                      aria-label="Segmentar"
                      ng-click="segmentsDialog(); $event.stopPropagation();">
             Lista de segmentos salvos

@@ -5,9 +5,6 @@ class SegmentsController < ApplicationController
     @segments = []
     $redis.smembers('segments').each do |segment|
       segment_parsed = JSON::parse(segment)
-
-      p segment_parsed
-
       hash = {}
       hash[:age] = segment_parsed['age'] if segment_parsed['age']
       hash[:start_age] = segment_parsed['start_age'] if segment_parsed['start_age']

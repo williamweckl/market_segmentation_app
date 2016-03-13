@@ -43,10 +43,10 @@ md-input-container {
 
 md-list-item {
   min-height: 30px!important;
-}
 
-md-list-item ._md-list-item-inner {
-  min-height: 30px!important;
+  ._md-list-item-inner {
+    min-height: 30px!important;
+  }
 }
 
 .positions-overflow {
@@ -65,4 +65,15 @@ md-list-item ._md-list-item-inner {
 
 .empty-state {
   color: #9E9E9E;
+}
+
+.custom-list-item {
+  min-height: 30px!important;
+  width: 100%;
+
+  ._md-list-item-inner {
+    min-height: 30px!important;
+    height: 100%;
+    padding: 8px 16px 0;
+  }
 }
