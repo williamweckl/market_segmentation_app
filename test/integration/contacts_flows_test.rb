@@ -34,6 +34,22 @@ class ContactsFlowsTest < ActionDispatch::IntegrationTest
     assert_equal true, page.has_content?("Nenhum contato cadastrado.")
   end
 
+  test 'contacts get API error' do
+    Capybara.javascript_driver = :selenium_billy
+    Capybara.current_driver = Capybara.javascript_driver
+
+    page.driver.browser.manage.window.resize_to(1280,768)
+
+    proxy.stub(/.*contacts.*/).and_return(:code => 500)
+
+    visit '/'
+    sleep 1
+    assert_equal page.find('.md-toast-text').text, 'Ops, algo deu errado. Isso não deveria acontecer mas fique tranquilo, logo será resolvido.'
+
+    Capybara.javascript_driver = :selenium
+    Capybara.current_driver = Capybara.javascript_driver
+  end
+
   test 'filters sidenav should be opened in resolutions above 1280px' do
     page.driver.browser.manage.window.resize_to(1280,768)
 
@@ -58,14 +74,6 @@ class ContactsFlowsTest < ActionDispatch::IntegrationTest
     find("#content").click
     sleep 1
     assert_equal false, page.has_selector?("md-sidenav[md-component-id='filters']", visible: true)
-  end
-
-  test 'filters' do
-
-  end
-
-  test 'filters with save' do
-
   end
 
 end

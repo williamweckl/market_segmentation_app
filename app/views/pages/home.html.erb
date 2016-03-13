@@ -58,14 +58,14 @@
                      max="105">
           </md-slider>
           <md-input-container>
-            <input flex type="number" ng-model="filterObject.startAge" aria-label="Idade de">
+            <input id="start-age" flex type="number" ng-model="filterObject.startAge" aria-label="Idade de">
           </md-input-container>
         </md-slider-container>
 
         <md-slider-container>
           <span>Idade até</span>
           <md-slider ng-model="filterObject.endAge"
-                     aria-label="Idade até"
+                     aria-label="Idade ate"
                      class="md-accent"
                      md-discrete
                      flex
@@ -73,7 +73,7 @@
                      max="105">
           </md-slider>
           <md-input-container>
-            <input flex type="number" ng-model="filterObject.endAge" aria-label="Idade até">
+            <input id="end-age" flex type="number" ng-model="filterObject.endAge" aria-label="Idade ate">
           </md-input-container>
         </md-slider-container>
 
@@ -83,14 +83,14 @@
             <div layout="row" layout-align="center-center" ng-if="!positionsLoading && positions.length">
               <md-input-container>
                 <label>Nome do cargo</label>
-                <input ng-model="positionSearch.name">
+                <input id="position-search-name" ng-model="positionSearch.name">
               </md-input-container>
             </div>
           <div class="positions-overflow">
             <md-list-item ng-repeat="position in positions | filter:positionSearch track by position.id"
                           ng-if="!positionsLoading">
-              <p> {{ position.name }} </p>
-              <md-checkbox class="md-secondary" ng-model="position.selected"></md-checkbox>
+              <p class="position-item"> {{ position.name }} </p>
+              <md-checkbox id="position-checkbox-{{position.id}}" class="md-secondary position-checkbox" ng-model="position.selected"></md-checkbox>
             </md-list-item>
             <div layout="row" layout-sm="column" layout-align="space-around" ng-if="positionsLoading">
               <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
@@ -102,7 +102,7 @@
         </md-list>
 
         <div layout="row" layout-align="center-center">
-          <md-checkbox class="md-secondary" ng-model="filterObject.save">Salvar segmento</md-checkbox>
+          <md-checkbox id="save-segment-checkbox" class="md-secondary" ng-model="filterObject.save">Salvar segmento</md-checkbox>
         </div>
 
         <div layout="row" layout-align="center-center">

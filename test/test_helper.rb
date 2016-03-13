@@ -4,6 +4,7 @@ require 'rails/test_help'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'capybara/rails'
+require 'support/billy'
 require 'pp'
 
 # Load support files
@@ -33,4 +34,5 @@ end
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
+  include Billy::MinitestHelper
 end

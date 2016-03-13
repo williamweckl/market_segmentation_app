@@ -62,6 +62,7 @@ group :test do
   gem 'capybara'
   gem 'capybara_minitest_spec'
   gem 'selenium-webdriver'
+  gem 'puffing-billy'
 end
 
 gem "bower-rails"
