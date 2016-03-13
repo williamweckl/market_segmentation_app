@@ -9,20 +9,23 @@ module.exports = function(config) {
 
 
         // frameworks to use
-        frameworks: ['jasmine', 'ng-scenario'],
+        //, 'ng-scenario'
+        frameworks: ['jasmine'],
 
 
         // list of files / patterns to load in the browser
         files: [
             APPLICATION_SPEC,
-            'app/assets/javascripts/angular/*/*.js',
-            'spec/javascripts/**/*_spec.js'
+            'app/assets/javascripts/**/*.js',
+            'spec/javascripts/**/*_spec.js',
+            'vendor/assets/bower_components/angular/angular.js',
+            'vendor/assets/bower_components/angular-mocks/angular-mocks.js',
         ],
 
         // list of files to exclude
         exclude: [
             'app/assets/javascripts/cable.coffee',
-            'vendor/assets/bower_components/**/*.js',
+            //'vendor/assets/bower_components/**/*.js',
         ],
 
 

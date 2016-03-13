@@ -46,7 +46,7 @@ this.app.controller('ContactsCtrl', ['$scope', '$rootScope', '$q', 'Contact', 'I
             params: params,
             listVars: $scope.listVars,
             loadingPromise: loadingPromise
-        }
+        };
 
         //calling Index service and at the return add objects to list
         Index.do(IndexConfig).then(function (data) {
@@ -82,7 +82,7 @@ this.app.controller('ContactsCtrl', ['$scope', '$rootScope', '$q', 'Contact', 'I
         var element = angular.element(document.getElementById('content'));
 
         //animate scroll to the top
-        element.scrollTop(0, 1000);
+        if (!$rootScope.isEmpty(element)) element.scrollTop(0, 1000);
         //reset page
         $scope.page = 1;
         $scope.listVars.end = false;
