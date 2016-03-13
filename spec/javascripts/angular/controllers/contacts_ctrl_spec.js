@@ -3,7 +3,7 @@ describe('ContactsCtrl', function() {
 
     beforeEach(module('segmentation'));
 
-    beforeEach(inject(function($controller, $rootScope, $httpBackend, _$q_) { //, _$location_, _restService_
+    beforeEach(inject(function($controller, $rootScope, $httpBackend, _$q_) {
         scope = $rootScope.$new();
         rootScope = $rootScope;
         q = _$q_;
