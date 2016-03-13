@@ -5,27 +5,27 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', '$mdDialog', '
     $scope.positionSearch = {name: ''}
     $scope.positions = [];
 
-    /* Don't allow startAge be hight than endAge */
+    /* Don't allow startAge be higher than endAge */
 
-    var initializingStartAge = true;
-    $scope.$watch('filterObject.startAge', function (newValue, oldValue) {
-        if (!initializingStartAge) {
-            if (newValue > $scope.filterObject.endAge) {
-                $scope.filterObject.startAge = $scope.filterObject.endAge;
-            }
-        }
-        initializingStartAge = false;
-    });
-
-    var initializingEndAge = true;
-    $scope.$watch('filterObject.endAge', function (newValue, oldValue) {
-        if (!initializingEndAge) {
-            if (newValue < $scope.filterObject.startAge) {
-                $scope.filterObject.endAge = $scope.filterObject.startAge;
-            }
-        }
-        initializingEndAge = false;
-    });
+    //var initializingStartAge = true;
+    //$scope.$watch('filterObject.startAge', function (newValue, oldValue) {
+    //    if (!initializingStartAge) {
+    //        if (newValue > $scope.filterObject.endAge) {
+    //            $scope.filterObject.startAge = $scope.filterObject.endAge;
+    //        }
+    //    }
+    //    initializingStartAge = false;
+    //});
+    //
+    //var initializingEndAge = true;
+    //$scope.$watch('filterObject.endAge', function (newValue, oldValue) {
+    //    if (!initializingEndAge) {
+    //        if (newValue < $scope.filterObject.startAge) {
+    //            $scope.filterObject.endAge = $scope.filterObject.startAge;
+    //        }
+    //    }
+    //    initializingEndAge = false;
+    //});
 
     /* Positions */
 
