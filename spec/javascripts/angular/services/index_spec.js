@@ -1,6 +1,6 @@
 describe('Index service', function() {
 
-    var mdToast, httpBackend, Index, _Contact_;
+    var mdToast, httpBackend, Index, Contact;
 
     beforeEach(module('segmentation'));
 
