@@ -24,7 +24,7 @@ this.app.service("Index", ['$q', '$mdToast', function ($q, $mdToast) {
 
                 $mdToast.show(
                     $mdToast.simple()
-                        .textContent('Ocorreu um erro ao buscar dados da API.')
+                        .textContent('Ops, algo deu errado. Isso não deveria acontecer mas fique tranquilo, logo será resolvido.')
                         .hideDelay(3000)
                 );
 
