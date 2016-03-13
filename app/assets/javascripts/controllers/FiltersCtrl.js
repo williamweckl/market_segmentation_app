@@ -79,17 +79,12 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', '$mdDialog', '
     $scope.segmentsDialog = function () {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen
         $mdDialog.show({
-                controller: 'SegmentsCtrl',
-                templateUrl: 'segments_dialog',
-                //parent: angular.element(document.body),
-                clickOutsideToClose: true,
-                fullscreen: useFullScreen
-            })
-            .then(function (answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
-            }, function () {
-                $scope.status = 'You cancelled the dialog.';
-            });
+            controller: 'SegmentsCtrl',
+            templateUrl: 'segments_dialog',
+            //parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            fullscreen: useFullScreen
+        });
         $scope.$watch(function () {
             return $mdMedia('xs') || $mdMedia('sm');
         }, function (wantsFullScreen) {
