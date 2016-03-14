@@ -4,7 +4,7 @@ This application was developed for a job test to work in [Resultados Digitais](h
 
 The goal is to list contacts and to segment them by age, position or/and state. This segments can be saved to be possible to list it's contacts again in the future.
 
-The app is deployed in [heroku]().
+The app is deployed in [heroku](http://market-segmentation.herokuapp.com/).
 
 ## Technologies used
 
