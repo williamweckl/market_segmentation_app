@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :contacts, only: :index, defaults: {format: :json}
   resources :positions, only: :index, defaults: {format: :json}
   resources :segments, only: :index, defaults: {format: :json}
+  resources :states, only: :index, defaults: {format: :json}
 end
