@@ -22,6 +22,7 @@ describe('FiltersCtrl', function() {
     it('should set default values', function() {
         var controller = createController();
         expect(scope.positions).toEqual([]);
+        expect(scope.states).toEqual([]);
         expect(scope.filterObject.startAge).toEqual(16);
         expect(scope.filterObject.endAge).toEqual(105);
         expect(scope.positionSearch.name).toEqual('');
@@ -30,6 +31,7 @@ describe('FiltersCtrl', function() {
     describe('ages watchers', function() {
         it('should not allow startAge to be higher than endAge', function() {
             httpBackend.expect('GET', '/positions').respond([]);
+            httpBackend.expect('GET', '/states').respond([]);
 
             var controller = createController();
             scope.filterObject.endAge = 50;
@@ -41,6 +43,7 @@ describe('FiltersCtrl', function() {
         });
         it('should not allow endAge to be lesser than startAge', function() {
             httpBackend.expect('GET', '/positions').respond([]);
+            httpBackend.expect('GET', '/states').respond([]);
 
             var controller = createController();
             scope.filterObject.startAge = 51;
@@ -57,6 +60,7 @@ describe('FiltersCtrl', function() {
             var positions = [{"id":1},{'id': 2}];
 
             httpBackend.expect('GET', '/positions').respond(positions);
+            httpBackend.expect('GET', '/states').respond(positions);
 
             var controller = createController();
             httpBackend.flush();
@@ -67,9 +71,26 @@ describe('FiltersCtrl', function() {
         });
     });
 
+    describe('getStates', function () {
+        it('should get states from the API', function() {
+            var states = [{"id":1},{'id': 2}];
+
+            httpBackend.expect('GET', '/positions').respond(states);
+            httpBackend.expect('GET', '/states').respond(states);
+
+            var controller = createController();
+            httpBackend.flush();
+            expect(scope.states.length).toEqual(states.length);
+
+            httpBackend.verifyNoOutstandingExpectation();
+            httpBackend.verifyNoOutstandingRequest();
+        });
+    });
+
     describe('filter', function () {
         it('should send contacts-filtered broadcast', function() {
             httpBackend.expect('GET', '/positions').respond([]);
+            httpBackend.expect('GET', '/states').respond([]);
             var controller = createController();
             spyOn(rootScope, '$broadcast');
 
@@ -81,6 +102,7 @@ describe('FiltersCtrl', function() {
     describe('segmentsDialog', function () {
         it('should open dialog', function() {
             httpBackend.expect('GET', '/positions').respond([]);
+            httpBackend.expect('GET', '/states').respond([]);
             var controller = createController();
             spyOn(mdDialog, 'show').and.callThrough();
             scope.segmentsDialog();
@@ -91,6 +113,7 @@ describe('FiltersCtrl', function() {
     describe('segment-selected broadcast', function () {
         it('should call filter', function() {
             httpBackend.expect('GET', '/positions').respond([]);
+            httpBackend.expect('GET', '/states').respond([]);
             var controller = createController();
             var filterObject = {age: 30};
             spyOn(scope, 'filter').and.callThrough();
@@ -99,6 +122,7 @@ describe('FiltersCtrl', function() {
         });
         it('should select positions', function() {
             httpBackend.expect('GET', '/positions').respond([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
+            httpBackend.expect('GET', '/states').respond([]);
             var controller = createController();
             httpBackend.flush();
 
@@ -110,6 +134,26 @@ describe('FiltersCtrl', function() {
                     expect(position.selected).toEqual(true);
                 } else {
                     expect(position.selected).toEqual(false);
+                }
+            });
+
+            httpBackend.verifyNoOutstandingExpectation();
+            httpBackend.verifyNoOutstandingRequest();
+        });
+        it('should select states', function() {
+            httpBackend.expect('GET', '/positions').respond([]);
+            httpBackend.expect('GET', '/states').respond([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
+            var controller = createController();
+            httpBackend.flush();
+
+            var filterObject = {states: '1,2,3'};
+            rootScope.$broadcast('segment-selected', filterObject);
+
+            angular.forEach(scope.states, function(state) {
+                if ([1,2,3].indexOf(state.id) > -1) {
+                    expect(state.selected).toEqual(true);
+                } else {
+                    expect(state.selected).toEqual(false);
                 }
             });
 

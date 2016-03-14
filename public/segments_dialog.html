@@ -20,6 +20,7 @@
                         <div class="_md-list-item-inner segment-item">
                             <div class="md-list-item-text" layout="column">
                                 <span ng-if="segment.positions">Cargos: {{segment.positions.join(', ')}}</span>
+                                <span ng-if="segment.state_names">Estados: {{segment.state_names.join(', ')}}</span>
                                 <span ng-if="segment.age">Idade: {{segment.age}} anos</span>
                                 <span ng-if="!segment.age">Idade: de {{segment.start_age || 16}} até {{segment.end_age || 105}} anos</span>
                             </div>

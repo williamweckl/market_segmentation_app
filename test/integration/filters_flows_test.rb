@@ -2,11 +2,8 @@ require 'test_helper'
 class FiltersFlowsTest < ActionDispatch::IntegrationTest
 
   setup do
-    page.driver.browser.manage.window.resize_to(1350,768)
-  end
-
-  teardown do
     $redis.flushall
+    page.driver.browser.manage.window.resize_to(1350,768)
   end
 
   test 'home' do
@@ -46,6 +43,37 @@ class FiltersFlowsTest < ActionDispatch::IntegrationTest
     page.driver.browser.manage.window.resize_to(1280,768)
 
     proxy.stub(/.*positions.*/).and_return(:code => 500)
+
+    visit '/'
+    sleep 1
+    assert_equal page.find('.md-toast-text').text, 'Ops, algo deu errado. Isso não deveria acontecer mas fique tranquilo, logo será resolvido.'
+
+    Capybara.javascript_driver = :selenium
+    Capybara.current_driver = Capybara.javascript_driver
+  end
+
+  test 'should have states list' do
+    visit '/'
+    states = State.to_a
+    states_divs = page.all(:css, '.state-item')
+    assert_equal states.size, states_divs.size
+
+    states_divs = states_divs.map do |states_div|
+      states_div.text
+    end.join(' ')
+
+    states.each do |state|
+      assert_includes states_divs, state[0]
+    end
+  end
+
+  test 'states get API error' do
+    Capybara.javascript_driver = :selenium_billy
+    Capybara.current_driver = Capybara.javascript_driver
+
+    page.driver.browser.manage.window.resize_to(1280,768)
+
+    proxy.stub(/.*states.*/).and_return(:code => 500)
 
     visit '/'
     sleep 1
@@ -97,6 +125,17 @@ class FiltersFlowsTest < ActionDispatch::IntegrationTest
     end.join(' ')
 
     assert_includes contacts_divs, contacts(:six).email
+
+    # With state #
+
+    page.find("#state-checkbox-24").click
+
+    click_button('Segmentar')
+
+    sleep 1
+
+    contacts_divs = page.all(:css, '.contact-item')
+    assert_equal 0, contacts_divs.size
   end
 
   test 'filters with save' do
@@ -108,6 +147,7 @@ class FiltersFlowsTest < ActionDispatch::IntegrationTest
     page.find("#end-age").set(31)
     page.find("#start-age").set(30)
     page.find("#position-checkbox-#{positions(:three).id}").click
+    page.find("#state-checkbox-24").click
 
     assert_equal 0, $redis.smembers('segments').size
 

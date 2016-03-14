@@ -16,6 +16,13 @@ class SegmentsController < ApplicationController
           hash[:positions] << Position.find_by(id: position_id).try(:name)
         end
       end
+      if segment_parsed['states']
+        hash[:states] = segment_parsed['states'].split(',')
+        hash[:state_names] = []
+        hash[:states].each do |state|
+          hash[:state_names] << State.translations[state.to_i - 1]
+        end
+      end
       @segments << hash
     end
 

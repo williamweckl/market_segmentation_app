@@ -50,7 +50,12 @@ md-list-item {
 }
 
 .positions-overflow {
-  max-height: 150px;
+  max-height: 120px;
+  overflow: auto;
+}
+
+.states-overflow {
+  max-height: 90px;
   overflow: auto;
 }
 

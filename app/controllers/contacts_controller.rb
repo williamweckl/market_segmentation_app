@@ -32,6 +32,7 @@ class ContactsController < ApplicationController
           start_age: params[:start_age],
           end_age: params[:end_age],
           position_ids: params[:position_ids],
+          states: params[:states]
       }.to_json)
     end
   end

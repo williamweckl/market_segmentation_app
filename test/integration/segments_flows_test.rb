@@ -6,6 +6,7 @@ class SegmentsFlowsTest < ActionDispatch::IntegrationTest
         {age: '30'},
         {start_age: '40', end_age: '51'},
         {position_ids: positions(:one).id.to_s, positions: [positions(:one).name]},
+        {states: '1,2,3', state_names: ['Acre', 'Alagoas', 'Amapá']},
     ]
   end
 
@@ -48,10 +49,12 @@ class SegmentsFlowsTest < ActionDispatch::IntegrationTest
     segments_divs.each_with_index do |segments_div, index|
       segment = segments[index]
       position_text = "Cargos: #{segment[:positions].join(', ')}" if segment[:positions]
+      state_text = "Estados: #{segment[:state_names].join(', ')}" if segment[:state_names]
       age_text = "Idade: #{segment[:age]} anos" if segment[:age]
       age_start_end_text = "Idade: de #{segment[:start_age]} até #{segment[:end_age]} anos" if segment[:start_age]
 
       assert_includes segments_div.text, position_text if position_text
+      assert_includes segments_div.text, state_text if state_text
       assert_includes segments_div.text, age_text if age_text
       assert_includes segments_div.text, age_start_end_text if age_start_end_text
     end

@@ -36,6 +36,8 @@ this.app.controller('ContactsCtrl', ['$scope', '$rootScope', '$q', 'Contact', 'I
             }
             if (filterObject.positionIds)
                 params.position_ids = filterObject.positionIds;
+            if (filterObject.states)
+                params.states = filterObject.states;
             if (filterObject.save)
                 params.save = true;
         }

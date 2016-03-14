@@ -101,6 +101,20 @@
           </div>
         </md-list>
 
+        <md-list class="fixedRows">
+          <md-subheader class="md-no-sticky">Estados</md-subheader>
+          <div class="states-overflow">
+            <md-list-item ng-repeat="state in states track by state.id"
+                          ng-if="!statesLoading">
+              <p class="state-item"> {{ state.name }} </p>
+              <md-checkbox id="state-checkbox-{{state.id}}" class="md-secondary state-checkbox" ng-model="state.selected"></md-checkbox>
+            </md-list-item>
+            <div layout="row" layout-sm="column" layout-align="space-around" ng-if="statesLoading">
+              <md-progress-circular md-mode="indeterminate" md-diameter="30"></md-progress-circular>
+            </div>
+          </div>
+        </md-list>
+
         <div layout="row" layout-align="center-center">
           <md-checkbox id="save-segment-checkbox" class="md-secondary" ng-model="filterObject.save">Salvar segmento</md-checkbox>
         </div>

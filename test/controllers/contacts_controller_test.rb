@@ -128,10 +128,12 @@ class ContactsControllerTest < ActionController::TestCase
     assert_equal $redis.smembers('segments').size, 3
     get :index, params: {save: true}.merge(start_age: '33', end_age: '50')
     assert_equal $redis.smembers('segments').size, 4
+    get :index, params: {save: true}.merge(states: '1')
+    assert_equal $redis.smembers('segments').size, 5
 
     # Should not save duplicates
     get :index, params: {save: 'true'}.merge(filters)
-    assert_equal $redis.smembers('segments').size, 4
+    assert_equal $redis.smembers('segments').size, 5
   end
 
 

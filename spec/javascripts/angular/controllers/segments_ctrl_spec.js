@@ -42,10 +42,10 @@ describe('SegmentsCtrl', function() {
         it('should send segment-selected broadcast', function() {
             var controller = createController();
 
-            var segment = { position_ids: '1,2,3', age: '30', start_age: '30', end_age: '30' };
+            var segment = { position_ids: '1,2,3', states: '2,4,5', age: '30', start_age: '30', end_age: '30' };
 
             scope.filterBySegment(segment);
-            expect(rootScope.$broadcast).toHaveBeenCalledWith('segment-selected', { positionIds: '1,2,3', age: 30, startAge: 30, endAge: 30 });
+            expect(rootScope.$broadcast).toHaveBeenCalledWith('segment-selected', { positionIds: '1,2,3', states: '2,4,5', age: 30, startAge: 30, endAge: 30 });
         });
     });
 });

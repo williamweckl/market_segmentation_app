@@ -37,6 +37,7 @@ this.app.controller('SegmentsCtrl', ['$scope', '$rootScope', '$q', '$mdDialog', 
     $scope.filterBySegment = function(segment) {
         var filterObject = {
             positionIds: segment.position_ids,
+            states: segment.states,
         };
 
         //if age, fill the sliders with the age value

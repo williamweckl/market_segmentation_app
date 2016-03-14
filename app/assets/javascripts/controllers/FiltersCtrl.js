@@ -1,9 +1,10 @@
-this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', '$mdDialog', '$mdMedia', 'Position', 'Index', function ($scope, $rootScope, $q, $mdDialog, $mdMedia, Position, Index) {
+this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', '$mdDialog', '$mdMedia', 'Position', 'State', 'Index', function ($scope, $rootScope, $q, $mdDialog, $mdMedia, Position, State, Index) {
 
     /* Initialize variables with default values */
     $scope.filterObject = {startAge: 16, endAge: 105};
     $scope.positionSearch = {name: ''}
     $scope.positions = [];
+    $scope.states = [];
 
     /* Don't allow startAge be higher than endAge */
 
@@ -53,6 +54,30 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', '$mdDialog', '
     //Get positions
     getPositions();
 
+    //function to get states from the API
+    function getStates() {
+        //Create loading with promise to stop loading when the request is finished
+        $scope.statesLoading = true;
+        var loadingPromise = $q.defer();
+        loadingPromise.promise.then(function () {
+            $scope.statesLoading = false;
+        });
+
+        //configure Index service to get contacts
+        var IndexConfig = {
+            resource: State,
+            loadingPromise: loadingPromise
+        }
+
+        //calling Index service and at the return add objects to list
+        Index.do(IndexConfig).then(function (data) {
+            $scope.states = data;
+        });
+    };
+
+    //Get positions
+    getStates();
+
     /* Filter */
 
     $scope.filter = function () {
@@ -70,6 +95,14 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', '$mdDialog', '
                 $scope.filterObject.positionIds.push(position.id);
         });
         $scope.filterObject.positionIds = $scope.filterObject.positionIds.join();
+
+        //Get selected states
+        $scope.filterObject.states = [];
+        angular.forEach($scope.states, function (state) {
+            if (state.selected)
+                $scope.filterObject.states.push(state.id);
+        });
+        $scope.filterObject.states = $scope.filterObject.states.join();
 
         //Send broadcast to contacts controller
         $rootScope.$broadcast('contacts-filtered', $scope.filterObject, loadingPromise);
@@ -99,6 +132,13 @@ this.app.controller('FiltersCtrl', ['$scope', '$rootScope', '$q', '$mdDialog', '
                 position.selected = true;
             } else {
                 position.selected = false;
+            }
+        });
+        angular.forEach($scope.states, function (state) {
+            if (filterObject.states && filterObject.states.indexOf(state.id.toString()) > -1) {
+                state.selected = true;
+            } else {
+                state.selected = false;
             }
         });
         $scope.filter();
