@@ -1,1 +1,1 @@
-$redis = Redis.new(:host => 'localhost', :port => 6379)
+$redis = (Rails.env.production?) ? Redis.new(url: ENV["REDIS_URL"]) : Redis.new(:host => 'localhost', :port => 6379)
