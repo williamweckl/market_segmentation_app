@@ -18,6 +18,7 @@ class Contact < ApplicationRecord
 
   #Scopes
   scope :by_position_ids, -> (position_ids) { where(position_id: position_ids) }
+  scope :by_states, -> (states) { where(state: states) }
   scope :by_age, -> (age) { where(age: age) }
   scope :by_age_range, -> (start_age, end_age) do
     if start_age and end_age

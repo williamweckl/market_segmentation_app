@@ -75,6 +75,34 @@ class ContactsControllerTest < ActionController::TestCase
     assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:four).name }.with_indifferent_access
   end
 
+  test 'return filtered by state' do
+    get :index, params: {states: State::SC.to_s}
+    assert_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:one).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:two).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:three).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:four).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:five).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:six).name }.with_indifferent_access
+
+    get :index, params: {states: State::RR.to_s}
+    assert_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:four).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:two).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:three).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:one).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:five).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:six).name }.with_indifferent_access
+  end
+
+  test 'return filtered by states' do
+    get :index, params: {states: [State::SC, State::PR].join(',')}
+    assert_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:one).name }.with_indifferent_access
+    assert_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:two).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:three).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:four).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:five).name }.with_indifferent_access
+    assert_not_includes json.map{|contact| {'name' => contact['name']}}, { name: contacts(:six).name }.with_indifferent_access
+  end
+
   test 'saving filters' do
     $redis.flushall #reset redis database
     filters = {position_ids: [positions(:one).id, positions(:three).id].join(',')}

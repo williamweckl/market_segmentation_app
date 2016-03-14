@@ -13,6 +13,7 @@ class ContactsController < ApplicationController
 
   def apply_filters
     @contacts = @contacts.by_position_ids(params[:position_ids].split(',')) unless params[:position_ids].blank?
+    @contacts = @contacts.by_states(params[:states].split(',')) unless params[:states].blank?
     if !params[:age].blank?
       @contacts = @contacts.by_age(params[:age])
     else
