@@ -1,7 +1,7 @@
 require 'faker'
 
 50.times do |n|
-  Position.find_or_create_by!(name: Faker::Company.profession)
+  Position.find_or_create_by!(name: Faker::Company.profession.capitalize)
 end
 
 100.times do |n|
