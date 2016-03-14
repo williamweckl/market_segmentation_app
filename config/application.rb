@@ -20,6 +20,7 @@ module Segmentation
     config.i18n.available_locales = [:en, :"pt-BR"]
     config.i18n.default_locale = :"pt-BR"
     config.i18n.locale = :"pt-BR"
+    Faker::Config.locale = :"pt-BR"
 
   end
 end
