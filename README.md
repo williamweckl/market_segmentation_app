@@ -1,4 +1,4 @@
-# Segmentation Example APP
+# Market Segmentation Example APP
 
 This application was developed for a job test to work in [http://resultadosdigitais.com.br](Resultados Digitais).
 
